@@ -18,6 +18,19 @@
             "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
         },
         {
+            "name": "Cpp abcpp Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Cpp/abcpp/abcpp",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/Cpp/abcpp",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
+        },
+        {
             //"name": "(gdb) Launch",
             "name": "MELTSPREAD SAMPLE Debugging",
             "type": "cppdbg",

@@ -3,6 +3,12 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
+// 
+// 
+// C_Lang // ~~~ // 
+// 
+// 
+//       
       {
         "type": "shell",
         "label": "C_Lang abc compile",
@@ -25,8 +31,44 @@
           "kind": "build",
           "isDefault": true
         },
-        "detail": "컴파일러: C:\\MinGW\\bin\\gcc.exe"
+        //"detail": "컴파일러: C:\\MinGW\\bin\\gcc.exe"
       },
+// 
+// 
+// Cpp // ~~~ // 
+// 
+// 
+//  
+      {
+        "type": "shell",
+        "label": "C++ abcpp compile",
+        "command": "C:\\MinGW\\bin\\g++.exe",
+        "args": [
+          //"-fdiagnostics-color=always",
+          "-g",
+          "-Wall",
+          "${workspaceFolder}/Cpp/abcpp/src/*.cpp",
+          "-o",
+          "${workspaceFolder}/Cpp/abcpp/abcpp.exe"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/Cpp/abcpp"
+        },
+        // "problemMatcher": [
+        // 	"$g++"
+        // ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        //"detail": "컴파일러: C:\\MinGW\\bin\\g++.exe"
+      },
+// 
+// 
+// Fortran // MELTSPREAD3.0 // ~~~ // 
+// 
+// 
+//  
       {
         "type": "shell",
         "label": "MELTSPREAD SAMPLE compile",
@@ -43,6 +85,8 @@
         },
         "group": "build"
       },
+
+      
       {
         "type": "shell",
         "label": "SPREADTEST15 compile",
