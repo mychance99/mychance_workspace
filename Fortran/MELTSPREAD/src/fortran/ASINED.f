@@ -1,0 +1,38 @@
+C...................................................................... 
+C.....SUBROUTINE ASINED ASSIGNS A 3-D VECTOR TO THE VECTOR HSEND FOR    
+C.....EVALUATION OF THE PROPERTY ROUTINES.
+C...................................................................... 
+      SUBROUTINE ASINED(IX,IY,HSEND,ROM,WPCC,WPM,WPA,WPCS,ROC,RMASSL,NCR
+     1AB)   
+      IMPLICIT DOUBLE PRECISION(A-H,O-Z)
+      COMMON/BASPR/ HBMT(999,999,16),HBMOLD(999,999,16)
+      DIMENSION HSEND(28),ROM(28)
+      DO 77 KT=1,28   
+      HSEND(KT)=0.D0  
+   77 CONTINUE
+      IF(NCRAB.GT.0) GO TO 10   
+      KLOW=1
+      KHIGH=15
+      GO TO 30
+   10 CONTINUE
+      IF(NCRAB.EQ.2) GO TO 20   
+      KLOW=8
+      KHIGH=15
+      GO TO 30
+   20 CONTINUE
+      KLOW=1
+      KHIGH=7
+   30 CONTINUE
+C.....ASSIGN HBMT TO HSEND VECTOR
+      DO 40 I=KLOW,KHIGH
+      CALL INDEX(I,IJIM)
+      HSEND(IJIM)=HBMT(IX,IY,I) 
+   40 CONTINUE
+      IF(NCRAB.EQ.2) GO TO 70   
+      HSEND(10)=WPCS*HBMT(IX,IY,16)
+      HSEND(11)=WPCC*HBMT(IX,IY,16)
+      HSEND(12)=WPM*HBMT(IX,IY,16)
+      HSEND(13)=WPA*HBMT(IX,IY,16)
+   70 CONTINUE
+      RETURN
+      END

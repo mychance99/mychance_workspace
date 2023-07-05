@@ -1,0 +1,71 @@
+MELTSPREAD3.0 SPREAD TEST 15 Input by MKWON, 20230616
+  2.98E+02  0.00E-00                         L1_, TCONI,RSAND
+  2                                          L2_, ICTC (Substrate Type, !=4 -> L3~L5_ are omitted)
+  4.14E02   4.34E02                          L6_, TFWS,TFWL (Concrete free water dryout temperature range)
+  8.53E02   8.73E02                          L7_, TBWS,TBWL (Concrete bound water [Ca(OH)2] decomposition temperature range)
+  103.30E01 105.30E01                        L8_, TMCAS,TMCAL (Concrete dolomite [MgCa(CO3)2] decomposition temperature range)
+  117.20E01 119.20E01                        L9_, TCAS,TCAL (Concrete calcium carbonate [CaCO3] decomposition temperature range)
+  1403.0E00 1523.0E00                        L10_, TFOS,TFOL (Melt oxide solidus-liquidus temperature range)
+  1617.0E00 1727.0E00                        L11_, TFMS,TFML (Melt metal phase solidus-liquidus temperature range)
+  2                                          L12_, NPOURS (Number of melt pour time intervals; L13-15_ are repeated NPOURS times)
+  0.00  6.7000  1804.0  0.0  0.0  0.0        L13_1, TST(I),TSTOP(I),AINTP(I),BINTP(I),ADEC(I),BDEC(I) (Pour time interval, TST to TSTOP), (Linear curve fit to melt pour temperature over the time interval (i.e. AINTP+BINTP*(t-TST(I)))), (Linear fit to melt decay heat level (expressed as W/kg UO2) over the time interval (i.e. ADEC+BDEC*(t-TST(I)))) 
+  3                                          L14_1, NISTP (Number of melt constituents draining over pour interval)
+  2   0.66500E+01   0.00000E+00              L15_1_1, ITPA,APOUR,BPOUR (Be repeated NISTP times) (Linear curve fit to melt pour rate(i.e. APOUR+BPOUR*(t-TST)) for ITPA-th melt constituent over time inverval in L13)
+  3   0.19000E+01   0.00000E+00              L15_1_2,
+  4   0.95000E+00   0.00000E+00              L15_1_3,
+  6.7  100000. 1804.0  0.0  0.0  0.0         L13_2,
+  0                                          L14_2,
+        0  4133 4133 4133 4133                          L16_, NJET,NJETD,NJETND,ERPV,POROSBED (NJET==0 bypass melt jet fragmentation & L17~18_ are omitted) 
+        0  4133 4133 4133 4133 4133 4133                L19_, NOVHT,COVS,COVL,DHSOV,XMOLOV,ROVS,ROVL (NOVHT=0 to use code-calculate)
+        0  4133 4133                                    L20_, NOVTK,TKOVS,TKOVL (NOVTK=0 to use calculated core debris sol-liq phase thermal conductivities)
+        0  4133                                         L21_, NOVUM,VISOV (NOVUM=0 to use calculated melt viscosity)
+        0  4133                                         L22_, NOVEM,EMOV (NOVEM=0 to use calculated melt radiation emissivity)
+        0  4133                                         L23_, NOVSIG,SIGOV (NOVSIG=0 to calculated melt surface tension)
+  1                                                                   L24_, NGEOM (Meshing options, NGEOM=1 for automated MARK 1 input & L33~34_ are omitted)
+  5   3   2    1   61   80                                            L25_, NSMP,NPED,NDOR,NDOOR,NSHL,NANULS (Number of spreading nodes)
+  0.100E00  0.000E00   0.175E00   0.05E00   0.05E00   0.1275E01       L26_, RSUMP,ELSMP,RPED,TPED,WDOOR,RSHELL   
+  0.02E00                                                             L27_, RCOMP (Melt pour dispersion radius beneath RPV)
+  0 4133                                                              L28_, NSMPCV,THCKCV (NSMPCV=0/1 if the sump cover plates are absent/present)    
+  0 4133 4133 4133                                                    L29_, NBOIL,TMBOIL,TEBOIL,VFINT (MARK 1 sump spillover calculation option), (NBOIL=0, L30_ is omitted)
+  0                                                                   L31_, NSWALL (NSWALL=0 to neglect sidewall heat losses) 
+  1.300E+02                                                           L32_, ANGFAN (Spreading angle outside doorway; 0 <= ANGFAN <= 180)
+  2    1   11  1.00E+00 7.260E+00                                     L35_, NVTPE,NSOLTP,NSOLF,ALPMAX,CRAMCON (NVTPE=2 to use Ramacciotti correlation), (NSOLTP=1, oxide phase solid fraction is assumed to vary linearly between the solidus-liquidus)
+        12                                   L37_, NMVER (Total number of vertical node cells in the underlying substrate at each spreading node location) 
+        2.5E-03   5.0E-03                    L38_1, XBCN,XDCN (Be repeated NMVER times) (Location of the interface between I-th and I+1-st substrate node cells), (Substrate inter-nodal spacing between I-th and I+1-st substrate node cells)
+        2.5E-03   5.0E-03                    L38_2, 
+        2.5E-03   5.0E-03                    L38_3,
+        2.5E-03   5.0E-03                    L38_4,
+        2.5E-03   5.0E-03                    L38_5,
+        2.5E-03   5.0E-03                    L38_6,
+        5.0E-03   1.0E-02                    L38_7,
+        5.0E-03   1.0E-02                    L38_8,
+        5.0E-03   1.0E-02                    L38_9,
+        5.0E-03   1.0E-02                    L38_10,
+        5.0E-03   1.0E-02                    L38_11,
+        5.0E-03   1.0E-02                    L38_12,
+  0    0                                                L39_, NSTEEL,NSIMST (Substrate to be treated as steel) (NSTEEL=0 -> L40 / NSIMST=0 -> L41~46 omitted)
+  1                                                     L47_, NSKIPE (Shell liner heatup calculation; NSKIPE=0 to bypass & L48~49 omitted) 
+  90    5  100    2    0    2                           L48_, NBMADJ,NUMSHH,NUMSHV,NBFZOE,NCRTEM,NLOGSH
+  384.E00   1.50E00  3.18E-02    45.E00 1.000E+00       L49_, TSHELI,HNODT,THSHL,ANGSHL,BWIDTH
+  300.E00   0.60E00   0.10E00                           L50_, TBOUND,EMISCN,PDRYWL
+  0   4133   4133   4133                                L51_, NWAT,HDOWNC,TWATI,EWATI (dry/wet cavity condition; NWAT<2, L52~57 are omitted)
+  1    4133    4133    4133    4    0    0              L58_, NBFRZO,NTHINC,NABLFM,NDRNFM,NBCBOT,NCRTOP,NADAB (Bulk freezing vs Crust formation)
+  1  4.80E+03                                           L59_, NINTF,HINTF (Interfacial heat transfer resistance; HINTF[W/m^2/K])
+  0.01E00   0.02E00                                     L60_, XFCABL,XNDMIN (Basemat ablation & debris solidification control parameter)          
+  5   20  0.001E00  0.005E00    0                       L61_, NVELP,NITMAX,DAVMX,DVMX,NINVIS (Melt fluid mechanics calculation)     
+  20   3.00E02   6.00E02                                L62_, NENMAX,DEAVMX,DEMX (Melt conservation of energy equation)        
+  4133    4133  4133  4133                              L63_, NVELPW,NITMXW,DAVMXW,DVMXW (Water fluid mechanics calculation)
+  20   3.00E02   6.00E02                                L64_, NENMXW,DEAVMXW,DEMXW (Water conservation of energy equation)        
+        1  2000   60   4133                  L65_, NPRINT,NPFREQ,NPEND,NBEDCQ             
+        7                                    L66_, NTIMSPC
+        5.0E+00                              L67_1, TIMSPC (Be repeated NTIMSPC times)
+        1.0E+01                              L67_2,
+        1.5E+01                              L67_3,
+        2.0E+01                              L67_4,
+        3.0E+01                              L67_5,
+        4.5E+01                              L67_6,
+        6.0E+01                              L67_7,
+        80    1                              L68_, NPLFREQ,NPLTOT
+        56                                   L69_, NPLLOC (Be repeated NPLTOT times)
+        0                                    L70_, NBPL
+        0.0E00  0.020E00  6.01E01            L72_, TIMEO,DTIME,TMAX              

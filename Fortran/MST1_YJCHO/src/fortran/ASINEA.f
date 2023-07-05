@@ -1,0 +1,37 @@
+C...................................................................... 
+C.....SUBROUTINE ASINEA ASSIGNS AN ARRAY TO VECTOR HSEND WHICH IS
+C.....COMPATABLE WITH THE PROPERTY ROUTINES.
+C...................................................................... 
+      SUBROUTINE ASINEA(HITE,KDR,HSEND,ROM,WPCC,WPM,WPA,WPCS,ROC,RMASSL,
+     1NCRAB)
+      IMPLICIT DOUBLE PRECISION(A-H,O-Z)
+      DIMENSION HITE(16,999),HSEND(28),ROM(28)
+      DO 76 KT=1,28   
+      HSEND(KT)=0.D0  
+   76 CONTINUE
+      IF(NCRAB.GT.0) GO TO 10   
+      KLOW=1
+      KHIGH=15
+      GO TO 30
+   10 CONTINUE
+      IF(NCRAB.EQ.2) GO TO 20   
+      KLOW=8
+      KHIGH=15
+      GO TO 30
+   20 CONTINUE
+      KLOW=1
+      KHIGH=7
+   30 CONTINUE
+C.....ASSIGN HITE ARRAY TO HSEND VECTOR.  
+      DO 40 I=KLOW,KHIGH
+      CALL INDEX(I,IJIM)
+      HSEND(IJIM)=HITE(I,KDR)   
+   40 CONTINUE
+      IF(NCRAB.EQ.2) GO TO 70   
+      HSEND(10)=WPCS*HITE(16,KDR)
+      HSEND(11)=WPCC*HITE(16,KDR)
+      HSEND(12)=WPM*HITE(16,KDR)
+      HSEND(13)=WPA*HITE(16,KDR)
+   70 CONTINUE
+      RETURN
+      END
