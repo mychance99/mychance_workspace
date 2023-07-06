@@ -71,6 +71,22 @@
             "externalConsole": true,
             "MIMode": "gdb",
             "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
+        },
+
+
+        {
+            //"name": "(gdb) Launch",
+            "name": "APR1400_YJCHO Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Fortran/MELTSPREAD3.0/APR1400_YJCHO/APR1400_YJCHO",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/Fortran/MELTSPREAD3.0/APR1400_YJCHO",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
         }
         // {
         //     "name": "Intel Debug Attach",
