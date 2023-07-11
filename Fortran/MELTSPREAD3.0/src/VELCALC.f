@@ -119,6 +119,7 @@ C.....SOLVE FOR THE CELL BOUNDARY VELOCITIES.
       IF(K.EQ.NUP) GO TO 6013   
       GO TO 6014      
 C.....BOUNDARY EDGE NODES ZEROED HERE.
+! Manual p.76
  6013 CONTINUE
       A(K)=1.D0
       B(K)=0.D0
@@ -140,7 +141,7 @@ C.....FLOW OPENING EXISTS, SO PROCEED.
       HAJM1=HTMP(K-1) 
       HAJM2=0.D0      
       IF(K.GT.2) HAJM2=HTMP(K-2)
-      VJM32=VEL(K-1)  
+      VJM32=VEL(K-1)       
       VJM12=VEL(K)    
       VJP12=VEL(K+1)  
       ACJM32=ARC(K-1) 
@@ -201,7 +202,7 @@ C.....CHECK IF NODE IS A SUMP
       D(K)=-VEL(K)    
       GO TO 5001      
  5004 CONTINUE
-C.....CALCULATE TDMA ELEMENTS FOR CASES IN WHICH THERE IS FLOW ACROSS   
+C.....CALCULATE TDMA(Tri-diagonal Matrix) ELEMENTS FOR CASES IN WHICH THERE IS FLOW ACROSS   
 C.....THE CELL BOUNDARIES.      
       W3=HAJM1*DMAX1(SNJM12,0.D0)-HAJ*DMAX1(-SNJM12,0.D0)     
       BBJ=(DTVEL*ACJM12*W3)/AREA(K)
@@ -297,7 +298,18 @@ C.....CASE 3 HERE: VJ>0 and VJ+1<0.
      1 VEL(J+1)=QJ/((HCP(J)-ELEVAT(J))*ARC(J+1))
  3818 CONTINUE 
 C.....SOLVE SIMPLIFIED CONSERVATION OF MASS EQUATION TO OBTAIN THE      
-C.....APROXIMATE HEIGHT DISTRIBUTION.     
+C.....APROXIMATE HEIGHT DISTRIBUTION.
+! 
+! VJM12 -> velocity j minus 1/2
+! VJP12 -> velocity j plus 1/2
+! HJM1  -> h j minus 1
+! HJ    -> h j
+! HJP1  -> h j plus 1
+! DTVEL -> DTIME/FLOAT(NVELP)
+! NVELP : Number of subintervals into which DTIME is subdivided for the fluid mechanics calculation
+! HTMOLD -> h time old -> h^(n)
+! ARC    -> S (width)
+! 
       DO 2611 KND=1,NUMNOD      
       VJM12=VEL(KND)  
       VJP12=VEL(KND+1)
