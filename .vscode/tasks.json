@@ -63,6 +63,30 @@
         },
         //"detail": "컴파일러: C:\\MinGW\\bin\\g++.exe"
       },
+      {
+        "type": "shell",
+        "label": "C++ VELCALC compile",
+        "command": "C:\\MinGW\\bin\\g++.exe",
+        "args": [
+          //"-fdiagnostics-color=always",
+          "-g",
+          "-Wall",
+          "${workspaceFolder}/Cpp/VELCALC/src/*.cpp",
+          "-o",
+          "${workspaceFolder}/Cpp/VELCALC/VELCALC.exe"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/Cpp/VELCALC"
+        },
+        // "problemMatcher": [
+        // 	"$g++"
+        // ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        //"detail": "컴파일러: C:\\MinGW\\bin\\g++.exe"
+      },
 // 
 // 
 // Fortran // MELTSPREAD3.0 // ~~~ // 

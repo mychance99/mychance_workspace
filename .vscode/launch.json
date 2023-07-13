@@ -31,6 +31,19 @@
             "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
         },
         {
+            "name": "Cpp VELCALC Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Cpp/VELCALC/VELCALC",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/Cpp/VELCALC",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
+        },
+        {
             //"name": "(gdb) Launch",
             "name": "MELTSPREAD SAMPLE Debugging",
             "type": "cppdbg",
