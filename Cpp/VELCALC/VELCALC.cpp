@@ -1,5 +1,5 @@
 #include <iostream>
-
+123456
 int main()
 {
     for (int kn = 0; kn < numnod; kn++)
