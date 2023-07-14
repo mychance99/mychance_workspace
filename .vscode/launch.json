@@ -73,6 +73,20 @@
         },
         {
             //"name": "(gdb) Launch",
+            "name": "SPREADTEST21 Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Fortran/MELTSPREAD3.0/SPREADTEST21/SPREADTEST21",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/Fortran/MELTSPREAD3.0/SPREADTEST21",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
+        },
+        {
+            //"name": "(gdb) Launch",
             "name": "MST1_YJCHO Debugging",
             "type": "cppdbg",
             "request": "launch",
