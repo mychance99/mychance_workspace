@@ -1,4 +1,4 @@
-MELTSPREAD3.0 SPREAD TEST 21 Input by MKWON, 20230714
+MELTSPREAD3.0 SPREAD TEST 21 Input by MKWON, 20230718
   2.98E+02  0.00E-00                         L1_, TCONI,RSAND
   2                                          L2_, ICTC (Substrate Type, !=4 -> L3~L5_ are omitted)
   4.14E02   4.34E02                          L6_, TFWS,TFWL (Concrete free water dryout temperature range)
@@ -16,7 +16,7 @@ MELTSPREAD3.0 SPREAD TEST 21 Input by MKWON, 20230714
   7.27  100000. 1778.0  0.0  0.0  0.0        L13_2,
   0                                          L14_2,
         2 2 20 0.08 0.40                                L16_, NJET,NJETD,NJETND,ERPV,POROSBED (NJET=2 for the case in which the fragmented material is assumed to be retained as a discrete particle bed on top the spreading melt, L17 is repeated NJETND times)(NJET=0 bypass melt jet fragmentation & L17~18_ are omitted) 
-        0.00E+00  0.30E-01                              L17_1, TJETT(I),DJETT(I) (RPV hole diameter vs. time table, be repeated NJETD times; minimum is two)
+        0.00E+00  0.30E-01                              L17_1, TJETT(I),DJETT(I) (Time table vs. RPV hole diameter, be repeated NJETD times; minimum is two)
         1.00E+07  0.30E-01                              L17_2,
         1                                               L18_1,
         2                                               L18_2,
@@ -67,16 +67,18 @@ MELTSPREAD3.0 SPREAD TEST 21 Input by MKWON, 20230714
         5.0E-03   1.0E-02                    L38_12,
   0    0                                                L39_, NSTEEL,NSIMST (Substrate to be treated as steel) (NSTEEL=0 -> L40 / NSIMST=0 -> L41~46 omitted)
   1                                                     L47_, NSKIPE (Shell liner heatup calculation; NSKIPE=0 to bypass & L48~49 omitted) 
-  90    5  100    2    0    2                          (230714 commit)   L48_, NBMADJ,NUMSHH,NUMSHV,NBFZOE,NCRTEM,NLOGSH
-  384.E00   1.50E00  3.18E-02    45.E00 1.000E+00       L49_, TSHELI,HNODT,THSHL,ANGSHL,BWIDTH
-  300.E00   0.60E00   0.10E00                           L50_, TBOUND,EMISCN,PDRYWL
-  0   4133   4133   4133                                L51_, NWAT,HDOWNC,TWATI,EWATI (dry/wet cavity condition; NWAT<2, L52~57 are omitted)
+  90    5  100    2    0    2                           L48_, NBMADJ,NUMSHH,NUMSHV,NBFZOE(1-> crust growth is not permitted on the liner, 2-> crust growth is permitted),NCRTEM,NLOGSH
+  298.E00   1.50E00   5.00E-02   45.E00   1.000E-01     L49_, TSHELI,HNODT,THSHL,ANGSHL,BWIDTH
+  298.E00   0.60E00   0.10E00                           L50_, TBOUND,EMISCN,PDRYWL
+  2   4133   298.0   4.00E-02                           L51_, NWAT,HDOWNC,TWATI,EWATI (dry/wet cavity condition; NWAT<2, L52~57 are omitted)
+  0                                                     L52_, NINJ (Number of spreading nodes into which water is injected at any time over the calculation, If NINJ=0, L53~54 are omitted)
+  0                                                     L55_, NDOWNC (Number of nodes in the spreading mesh where spillover can occur, If NDOWNC=0, L56~57 are omiited)
   1    4133    4133    4133    4    0    0              L58_, NBFRZO,NTHINC,NABLFM,NDRNFM,NBCBOT,NCRTOP,NADAB (Bulk freezing vs Crust formation)
   1  4.80E+03                                           L59_, NINTF,HINTF (Interfacial heat transfer resistance; HINTF[W/m^2/K])
   0.01E00   0.02E00                                     L60_, XFCABL,XNDMIN (Basemat ablation & debris solidification control parameter)          
   5   20  0.001E00  0.005E00    0                       L61_, NVELP,NITMAX,DAVMX,DVMX,NINVIS (Melt fluid mechanics calculation)     
   20   3.00E02   6.00E02                                L62_, NENMAX,DEAVMX,DEMX (Melt conservation of energy equation)        
-  4133    4133  4133  4133                              L63_, NVELPW,NITMXW,DAVMXW,DVMXW (Water fluid mechanics calculation)
+  2   5   0.001   0.005                                 L63_, NVELPW,NITMXW,DAVMXW,DVMXW (Water fluid mechanics calculation)
   20   3.00E02   6.00E02                                L64_, NENMXW,DEAVMXW,DEMXW (Water conservation of energy equation)        
         1  2000   60   4133                  L65_, NPRINT,NPFREQ,NPEND,NBEDCQ             
         7                                    L66_, NTIMSPC
@@ -90,4 +92,4 @@ MELTSPREAD3.0 SPREAD TEST 21 Input by MKWON, 20230714
         80    1                              L68_, NPLFREQ,NPLTOT
         56                                   L69_, NPLLOC (Be repeated NPLTOT times)
         0                                    L70_, NBPL
-        0.0E00  0.020E00  6.01E01            L72_, TIMEO,DTIME,TMAX      
+        0.0E00  0.010E00  6.01E01            L72_, TIMEO,DTIME,TMAX      
