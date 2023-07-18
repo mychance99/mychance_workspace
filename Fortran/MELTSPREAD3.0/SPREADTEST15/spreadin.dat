@@ -44,17 +44,15 @@ MELTSPREAD3.0 SPREAD TEST 15 Input by MCKWON, 20230718
         5.0E-03   1.0E-02                    L38_11,
         5.0E-03   1.0E-02                    L38_12,
   0    0                                                L39_, NSTEEL,NSIMST (Substrate to be treated as steel) (NSTEEL=0 -> L40 / NSIMST=0 -> L41~46 omitted)
-  1                                                     L47_, NSKIPE (Shell liner heatup calculation; NSKIPE=0 to bypass & L48~49 omitted) 
-  90    5  100    2    0    2                           L48_, NBMADJ,NUMSHH,NUMSHV,NBFZOE,NCRTEM,NLOGSH
-  298.E00   1.50E00   5.00E-02   45.E00   1.000E-01     L49_, TSHELI,HNODT,THSHL,ANGSHL,BWIDTH
-  298.E00   0.60E00   0.10E00                           L50_, TBOUND,EMISCN,PDRYWL
+  0                                                     L47_, NSKIPE (Shell liner heatup calculation; NSKIPE=0 to bypass & L48~49 omitted) 
+  3.00E02   0.60E00   0.10E00                           L50_, TBOUND,EMISCN,PDRYWL
   0   4133   4133   4133                                L51_, NWAT,HDOWNC,TWATI,EWATI (dry/wet cavity condition; NWAT<2, L52~57 are omitted)
   1    4133    4133    4133    4    0    0              L58_, NBFRZO,NTHINC,NABLFM,NDRNFM,NBCBOT,NCRTOP,NADAB (Bulk freezing vs Crust formation)
   1  4.80E+03                                           L59_, NINTF,HINTF (Interfacial heat transfer resistance; HINTF[W/m^2/K])
   0.01E00   0.02E00                                     L60_, XFCABL,XNDMIN (Basemat ablation & debris solidification control parameter)          
   5   20  0.001E00  0.005E00    0                       L61_, NVELP,NITMAX,DAVMX,DVMX,NINVIS (Melt fluid mechanics calculation)     
   20   3.00E02   6.00E02                                L62_, NENMAX,DEAVMX,DEMX (Melt conservation of energy equation)        
-  4133    4133  4133  4133                              L63_, NVELPW,NITMXW,DAVMXW,DVMXW (Water fluid mechanics calculation)
+  2   5   0.001   0.005                                 L63_, NVELPW,NITMXW,DAVMXW,DVMXW (Water fluid mechanics calculation)
   20   3.00E02   6.00E02                                L64_, NENMXW,DEAVMXW,DEMXW (Water conservation of energy equation)        
         1  2000   60   4133                  L65_, NPRINT,NPFREQ,NPEND,NBEDCQ             
         7                                    L66_, NTIMSPC
