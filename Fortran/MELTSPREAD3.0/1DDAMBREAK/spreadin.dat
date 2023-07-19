@@ -1,43 +1,15 @@
-MELTSPREAD3.0 SPREAD TEST 21 Input by MKWON, 20230718
+MELTSPREAD3.0 1D DAM BREAK Input by MKWON, 20230719
   2.98E+02  0.00E-00                         L1_, TCONI,RSAND
-  2                                          L2_, ICTC (Substrate Type, !=4 -> L3~L5_ are omitted)
-  4.14E02   4.34E02                          L6_, TFWS,TFWL (Concrete free water dryout temperature range)
-  8.53E02   8.73E02                          L7_, TBWS,TBWL (Concrete bound water [Ca(OH)2] decomposition temperature range)
-  103.30E01 105.30E01                        L8_, TMCAS,TMCAL (Concrete dolomite [MgCa(CO3)2] decomposition temperature range)
-  117.20E01 119.20E01                        L9_, TCAS,TCAL (Concrete calcium carbonate [CaCO3] decomposition temperature range)
+  5                                          L2_, ICTC (Substrate Type, ICTC=5(entirely steel) -> L3~9 are omitted)
   1403.0E00 1523.0E00                        L10_, TFOS,TFOL (Melt oxide solidus-liquidus temperature range)
   1617.0E00 1727.0E00                        L11_, TFMS,TFML (Melt metal phase solidus-liquidus temperature range)
   2                                          L12_, NPOURS (Number of melt pour time intervals; L13-15_ are repeated NPOURS times)
-  0.00  7.2700  1778.0  0.0  0.0  0.0        L13_1, TST(I),TSTOP(I),AINTP(I),BINTP(I),ADEC(I),BDEC(I) (Pour time interval, TST to TSTOP), (Linear curve fit to melt pour temperature over the time interval (i.e. AINTP+BINTP*(t-TST(I)))), (Linear fit to melt decay heat level (expressed as W/kg UO2) over the time interval (i.e. ADEC+BDEC*(t-TST(I)))) 
-  3                                          L14_1, NISTP (Number of melt constituents draining over pour interval)
-  2   0.66500E+01   0.00000E+00              L15_1_1, ITPA,APOUR,BPOUR (Be repeated NISTP times) (Linear curve fit to melt pour rate(i.e. APOUR+BPOUR*(t-TST)) for ITPA-th melt constituent over time inverval in L13)
-  3   0.19000E+01   0.00000E+00              L15_1_2,
-  4   0.95000E+00   0.00000E+00              L15_1_3,
-  7.27  100000. 1778.0  0.0  0.0  0.0        L13_2,
+  0.00  0.50  298.0  0.0  0.0  0.0           L13_1, TST(I),TSTOP(I),AINTP(I),BINTP(I),ADEC(I),BDEC(I) (Pour time interval, TST to TSTOP), (Linear curve fit to melt pour temperature over the time interval (i.e. AINTP+BINTP*(t-TST(I)))), (Linear fit to melt decay heat level (expressed as W/kg UO2) over the time interval (i.e. ADEC+BDEC*(t-TST(I)))) 
+  1                                          L14_1, NISTP (Number of melt constituents draining over pour interval)
+  16   3.0000E+02   0.00000E+00              L15_1_1, ITPA,APOUR,BPOUR (Be repeated NISTP times) (Linear curve fit to melt pour rate(i.e. APOUR+BPOUR*(t-TST)) for ITPA-th melt constituent over time inverval in L13)
+  0.50  100000. 298.0  0.0  0.0  0.0         L13_2,
   0                                          L14_2,
-        2 2 20 0.08 0.40                                L16_, NJET,NJETD,NJETND,ERPV,POROSBED (NJET=2 for the case in which the fragmented material is assumed to be retained as a discrete particle bed on top the spreading melt, L17 is repeated NJETND times)(NJET=0 bypass melt jet fragmentation & L17~18_ are omitted) 
-        0.00E+00  0.30E-01                              L17_1, TJETT(I),DJETT(I) (Time table vs. RPV hole diameter, be repeated NJETD times; minimum is two)
-        1.00E+07  0.30E-01                              L17_2,
-        1                                               L18_1,
-        2                                               L18_2,
-        3                                               L18_3,
-        4                                               L18_4,
-        5                                               L18_5,
-        6                                               L18_6,
-        7                                               L18_7,
-        8                                               L18_8,
-        9                                               L18_9,
-        10                                              L18_10,
-        11                                              L18_11,
-        12                                              L18_12,
-        13                                              L18_13,
-        14                                              L18_14,
-        15                                              L18_15,
-        16                                              L18_16,
-        17                                              L18_17,
-        18                                              L18_18,
-        19                                              L18_19,
-        20                                              L18_20,
+        0 2 20 0.08 0.40                                L16_, NJET,NJETD,NJETND,ERPV,POROSBED (NJET=2 for the case in which the fragmented material is assumed to be retained as a discrete particle bed on top the spreading melt, L17 is repeated NJETND times)(NJET=0 bypass melt jet fragmentation & L17~18_ are omitted) 
         0  4133 4133 4133 4133 4133 4133                L19_, NOVHT,COVS,COVL,DHSOV,XMOLOV,ROVS,ROVL (NOVHT=0 to use code-calculate)
         0  4133 4133                                    L20_, NOVTK,TKOVS,TKOVL (NOVTK=0 to use calculated core debris sol-liq phase thermal conductivities)
         0  4133                                         L21_, NOVUM,VISOV (NOVUM=0 to use calculated melt viscosity)

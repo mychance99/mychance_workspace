@@ -143,7 +143,22 @@
         },
         "group": "build"
       },
-
+      {
+        "type": "shell",
+        "label": "1DDAMBREAK compile",
+        "command": "gfortran",
+        "args": [
+          "-g",
+          //"-ffpe-trap=zero,invalid,overflow,underflow",
+          "${workspaceFolder}/Fortran/MELTSPREAD3.0/src/*.f",
+          "-o",
+          "${workspaceFolder}/Fortran/MELTSPREAD3.0/1DDAMBREAK/1DDAMBREAK.exe"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/Fortran/MELTSPREAD3.0"
+        },
+        "group": "build"
+      },
       {
         "type": "shell",
         "label": "MST1_YJCHO compile",
