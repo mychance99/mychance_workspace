@@ -1,0 +1,296 @@
+// #ifndef INPUT_H
+// #define INPUT_H
+
+// #include "main.cpp"
+
+// TMP......
+
+//  ! opr1000 model for coolap2
+//  ! (consistent with MELCOR containment/heat structures)
+//  ! cv volume 78395m3, pool 320K, floor area 67.6m2, pool depth 1-6m,
+//  ! (Uljin 3,4 FSAR, CAU info)
+//  ! corium jet tjin=3010K, djin=0.2m, vjin=6m/s (0-88.6s), at z=6.5m
+//  ! fixed particle Dmm 3mm
+
+
+
+//  & control
+itu=0; //  ! 0 sec, 1 hour, 2 day
+time = 0;
+tend = 3600.;
+//  !tend = 10000. //  ! qdc vs qrel balance roughly reaches
+//  !dt = 10 //  ! (unit:s) no need if specified by table
+//  !dtout = 300 //  ! no need if specified by table
+dtminlim = 1e-9;
+idbg = 1; //  ! echo of input for debug
+ncan = 1; //  ! number of cans
+
+//  nbody[1]=8  //  ! number of hot bodies
+nbody[0]=8; // NOT "0"??
+
+nmv = 0;  //  ! number of movement of bodies
+imbrq = 1; //  ! 1 use mbrq model, 0 not (default)
+iohsync = 1; //  ! 1 same output time for histories of hotcb and mbrq (default), 0 not 
+
+//  !decay heat parameters (simple approx of ANSI-ANS-5.1-2005)
+t0sdown = 18000; //  ! time after shutdown at calculation time=0
+powopr = 2815e6; //  ! core power at operation
+coremass = 141e3; //  ! total core debris mass (used to calculate decay heat per mass)
+//  ! UO2 84t, Zr 24t (as ZrO2 32.4t), stainless 25t => total 141t as total oxidic core debris
+//  ! 70. of the core is actually melted and drops => 141*0.7=99t as melt jet release,
+//  ! rest is assumed to be cooled somewhere in the containment.
+iresdh = 1; //  ! include decay heat remaining in RV as heat source
+
+tdt.n = 5;
+tdt.itu = 0; //  ! 0 sec, 1 hour, 2 day
+tdt.typ = 1; //  ! 0 linear, 1 step
+tdt.t = {0,   100,  200,  500, 1000};
+tdt.x = {0.1, 0.5,  1,    2,   5};
+
+tdtout.n = 5;
+tdtout.itu = 0; //  ! 0 sec, 1 hour, 2 day
+tdtout.typ = 1; //  ! 0 linear, 1 step
+tdtout.t = {0,   100,  200,  500, 1000};
+tdtout.x = {0.5, 1,    5,    10,  50};
+// //  /
+
+//  &can
+//  ! volume-level table       //  ! containment total free vol 78395m3/76m
+//  ! u:volume(m3)
+//  ! x:level(m)
+cn.tvollev.n = 8;
+cn.tvollev.typ = 0; //  ! linear
+cn.tvollev.u = {0, 338.0, 400.0, 15940.2, 17028.0, 28641.2, 56265.0, 78395.0}; //  ! volume (m3)
+cn.tvollev.x = {0, 5.0,   9.1,   25.4,    26.5,    34.1,    53.3,    76.0}; //  ! level (m)
+//  ! floor area A=338/5=67.6m2 => debris accumulation area is 
+//  ! separately given by md.plg.csar or md.plg.rr
+
+//  ! initial inventory specification by water levels
+cn.hl = 6.0; //  ! cavity initial water level
+// cn.hl = 3.0; //  ! cavity initial water level
+cn.hlc = 0.0;
+cn.tlc = 320.;
+cn.ts = 366.;  //  ! Ptot 0.2MPa with steam during accident, initially room temp. air 0.1MPa 
+                 //  ! => Psat(T)+0.1e6*(T/300)=0.2e6 --> T=366K, 0.2-Psat(T)=0.122e6
+cn.pn = 0.122e6; //  ! specify pn and pni, either of pv or ts can be omitted
+cn.pni = 0.;
+cn.mmn = 28.96; //  ! air M
+cn.ccn = 3.50; //  ! air cp*M/R
+//  /
+
+//  ! if hotbody exists, input for body needs to be provided
+//  & body
+//  !melcor node volume(m3) thickness(m) surface(m2) density(kg/m3) spec.heat(J/kgK) eff.cond(W/mK) z_low(m) z_high(m)
+//  !DOME302     3.182E+03  1.07E+00     2.96E+03    2276.3         869.9            1.60           53.34    75.24
+//  !CYL303      7.998E+03  1.30E+00     6.13E+03    2277.9         869.5            1.60           9.10     53.40
+//  !CAVB304     4.877E+03  4.52E+00     1.08E+03    2250.3         876.6            1.59           0.00     0.50
+//  !CAVW305     2.154E+02  2.59E+00     8.31E+01    2242.6         878.6            1.59           0.00     5.79
+//  !REFUL307    6.883E+02  6.92E-01     9.94E+02    2293.6         865.6            1.60           26.52    36.52
+//  !CONC309     3.022E+02  8.10E-01     3.73E+02    2394.2         841.5            1.63           14.63    24.63
+//  !CONC310     6.044E+03  7.88E-01     7.67E+03    2242.6         878.6            1.59           14.63    24.63
+//  !STL314      1.189E+02  1.03E-02     1.15E+04    7817.0         460.2            46.35          34.60    51.60
+
+//  !DOME302
+bd[0].ll    = 1.07E+00;
+bd[0].asf   = 2.96E+03;
+bd[0].vol   = 3.182E+03;
+bd[0].rho   = 2276.3;
+bd[0].cp    = 869.9;
+bd[0].lam   = 1.60;
+bd[0].epsrad = 0.8;
+bd[0].hlow  = 53.34;
+bd[0].hhigh = 75.24;
+bd[0].tini = 320.0;  //  ! initial temperature
+bd[0].icdn = 1; //  ! condensation model
+bd[0].fhtcdn = 1.;
+
+//  !CYL303
+bd[1].ll    = 1.30E+00;
+bd[1].asf   = 6.13E+03;
+bd[1].vol   = 7.998E+03;
+bd[1].rho   = 2277.9;
+bd[1].cp    = 869.5;
+bd[1].lam   = 1.60;
+bd[1].epsrad = 0.8;
+bd[1].hlow  = 9.10;
+bd[1].hhigh = 53.40;
+bd[1].tini = 320.0;  //  ! initial temperature
+bd[1].icdn = 1; //  ! condensation model
+bd[1].fhtcdn = 1.;
+
+//  !CAVB304
+bd[2].ll    = 4.52E+00;
+bd[2].asf   = 1.08E+03;
+bd[2].vol   = 4.877E+03;
+bd[2].rho   = 2250.3;
+bd[2].cp    = 876.6;
+bd[2].lam   = 1.59;
+bd[2].epsrad = 0.8;
+bd[2].hlow  = 0.00;
+bd[2].hhigh = 0.50;
+bd[2].tini = 320.0;  //  ! initial temperature
+//  ! no condensation on cavity floor
+
+//  !CAVW305
+bd[3].ll    = 2.59E+00;
+bd[3].asf   = 8.31E+01;
+bd[3].vol   = 2.154E+02;
+bd[3].rho   = 2242.6;
+bd[3].cp    = 878.6;
+bd[3].lam   = 1.59;
+bd[3].epsrad = 0.8;
+bd[3].hlow  = 0.00;
+bd[3].hhigh = 5.79;
+bd[3].tini = 320.0;  //  ! initial temperature
+bd[3].icdn = 1; //  ! condensation model
+bd[3].fhtcdn = 1.;
+
+//  !REFUL307
+bd[4].ll    = 6.92E-01;
+bd[4].asf   = 9.94E+02;
+bd[4].vol   = 6.883E+02;
+bd[4].rho   = 2293.6;
+bd[4].cp    = 865.6;
+bd[4].lam   = 1.60;
+bd[4].epsrad = 0.8;
+bd[4].hlow  = 26.52;
+bd[4].hhigh = 36.52;
+bd[4].tini = 320.0 ; //  ! initial temperature
+bd[4].icdn = 1; //  ! condensation model
+bd[4].fhtcdn = 1.;
+
+//  !CONC309
+bd[5].ll    = 8.10E-01;
+bd[5].asf   = 3.73E+02;
+bd[5].vol   = 3.022E+02;
+bd[5].rho   = 2394.2;
+bd[5].cp    = 841.5;
+bd[5].lam   = 1.63;
+bd[5].epsrad = 0.8;
+bd[5].hlow  = 14.63;
+bd[5].hhigh = 24.63;
+bd[5].tini = 320.0;  //  ! initial temperature
+bd[5].icdn = 1; //  ! condensation model
+bd[5].fhtcdn = 1.;
+
+//  !CONC310
+bd[6].ll    = 7.88E-01;
+bd[6].asf   = 7.67E+03;
+bd[6].vol   = 6.044E+03;
+bd[6].rho   = 2242.6;
+bd[6].cp    = 878.6;
+bd[6].lam   = 1.59;
+bd[6].epsrad = 0.8;
+bd[6].hlow  = 14.63;
+bd[6].hhigh = 24.63;
+bd[6].tini = 320.0;  //  ! initial temperature
+bd[6].icdn = 1;//  ! condensation model
+bd[6].fhtcdn = 1.;
+
+//  !STL314
+bd[7].ll    = 1.03E-02;
+bd[7].asf   = 1.15E+04;
+bd[7].vol   = 1.189E+02;
+bd[7].rho   = 7817.0;
+bd[7].cp    = 460.2;
+bd[7].lam   = 46.35;
+bd[7].epsrad = 0.1;
+bd[7].hlow  = 34.60;
+bd[7].hhigh = 51.60;
+bd[7].tini = 320.0 ; //  ! initial temperature
+bd[7].icdn = 1 ;//  ! condensation model
+bd[7].fhtcdn = 1.;
+
+//  /
+
+//  ! if mbrq exists, input for mbrq needs to be provided
+//  & mbrq
+
+md.ic = 1;  //  ! no. of can where mbrq is implemented
+
+//  !md.dtouth = 0.1   //  ! output interval for histories
+md.dtoutl = 10.0 ; //  ! output interval for lists
+md.dtoutp = 20.0;  //  ! output interval for particle tracking
+md.noutp  = 3 ;    //  ! frequency of the particle data output
+
+//  ! heat exchange buffer time step
+md.hx.dthex = 0.5;
+
+//  ! particle size generator options
+md.npsize= 20 ;//  ! sample size (max. 50, default 20)
+md.ipsize= 1 ; //  ! particle size option: 1:use distribution correlation,
+             //  !  2:distribution with given dmm, 3:fixed size given
+md.ipsizeran= 0; //  ! 0:fixed sample diameters, 1:stratified random sampling (LHS)
+md.cdmm= 1.0 ; //  ! factor for dmm (for ipsize=1) 
+md.cpsize= 3e-3 ;//  ! given dmm (for ipsize=2) or fixed particle dia. (for ipsize=3) 
+
+//  ! melt inlet condition time tables
+//  ! jet velocity
+md.vjin.typ = 1 ;  //  ! time table type 0:linear (flat outside ends) 1:step wise
+md.vjin.n = 2  ;   //  ! time table element number
+md.vjin.t = {0.0,   6.5833e+01};//  ! time   //  ! assuming 99t (rho=7960), vol=12.4m3
+md.vjin.x = {6.0, 0.0};    //  ! values //  ! from flow rate, time is t=12.4/(pi/4*dj^2*vj)
+                         //  ! =15.8/(dj^2*vj)
+//  ! jet inlet diameter
+md.djin.typ = 1;
+md.djin.n = 1;
+md.djin.t = {0.};
+md.djin.x = {0.2};
+//  ! jet inlet temperature
+md.tjin.typ = 1;
+md.tjin.n = 1;
+md.tjin.t = {0};
+md.tjin.x = {2800.0};
+
+//  ! melt material
+md.mppb.mname = "corium2"; //  ! corium with steel, Tliq/sol=2670/2420K
+
+//  ! melt inlet position
+md.plg.hh0 = 6.5;
+//  ! debris accumulation area (by csar or rr)
+//  !md.plg.rr = 4.639  //  ! for A=67.6m2
+//  !md.plg.csar = 67.6 //  ! total floor area 67.6m2, but not all would be the debris spreading area
+// md.plg.csar = 40.0;
+md.plg.csar = 80.0;
+
+
+//  ! melt jet
+md.mj.ibr = 1 ;    //  ! jet breakup 1:Taylor/Epstein, 2:Saito et al.
+md.mj.cbr = 1.0; //  ! factor for breakup length (=1/cent in JASMINE)
+md.mj.njet = 50;  //  ! jet node number for long jet
+md.mj.dzjet = 2e-2; //  ! jet node size for short jet
+
+//  ! melt particle
+md.mp.cvz= 0.5;  //  ! particle initial velocity
+md.mp.cvr= 0.5;  //  !  vz=cvz*vjet*ran, vr=cvr*vz*ran
+md.mp.ccd= 1.0;  //  ! particle drag coefficient factor
+md.mp.chtc= 0.5; //  ! particle heat transfer factor (0.5 for tuned with JASMINE)
+md.mp.iranvp= 1; //  ! 1:use random factor for velocity, 0:not
+md.mp.itsf= 1;   //  ! 1:consider surface temperature for HT, 0: not
+
+//  ! melt lump
+md.ml.itcr= 1;   //  ! 0:no merge 1:merge by Tav 2:merge by Tsf
+md.ml.ftcr= 1.0; //  ! merge when Tav > Tmel + ftcr*0.5*(Tliq-Tsol) for itcr=1
+                //  ! or Tsf > Tsol + ftcr*(Tliq-Tsol) for itcr=2 
+md.ml.fhtlmp=1.0; //  ! consideration of heat release from melt lump in DHF
+                 //  ! qdhf'=qdhf-qbtm; qbtm = Almp*Fhtlmp*lamm*2/Hlmp*(Tm-Tsat) (W)
+                 //  ! for every ring of debris bed
+md.ml.fqbdhf=0.5; //  ! qbtm < Fqbdhf*qdhf (limit qbtm at most less than DHF)
+
+//  ! debris bed
+md.db.ndr=20;  //  ! debris bed radial node (ring) number
+md.db.idiv= 2; //  ! 1:even area division, 2:even distance radial nodes for debris bed
+md.db.irep= 1; //  ! 1:consider avalanche with given repose angle, 2:not
+md.db.angrep=10.0; //  ! repose angle (deg) (for irep=1) assume a flat bed
+md.db.chtc=0.1; //  ! factor for particle heat transfer correlation
+               //  ! (attenuation should be given considering crowded geometry, 
+               //  !  0.1 recommended in JASMINE)
+md.db.idhf=1;   //  ! 1:use Rahman 1D DHF correlation as heat transfer limit, 0: not
+               //  ! 2:use Reed model, 3:use Lee model
+md.db.fdhf=1.0; //  ! correction factor for 1D top flooding DHF correlation
+md.db.dzdb = 5e-2; //  ! standard vertical node size
+md.db.epor = 0.5; //  ! porosity (constant for whole debris bed)
+
+
+
+// #endif
